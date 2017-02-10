@@ -39,3 +39,10 @@ Dockerfile
 
 uWSGI chdirs to /app so in uwsgi.ini you will need to make sure the python path
 to the wsgi.py file is relative to that.
+
+
+
+https://impythonist.wordpress.com/2016/04/30/a-practical-guide-for-building-restful-api-with-django-tastypie/
+https://github.com/dockerfiles/django-uwsgi-nginx
+cd /home/docker/code/app
+python manage.py runserver 0.0.0.0:80

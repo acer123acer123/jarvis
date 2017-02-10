@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
 	nginx \
 	supervisor \
 	sqlite3 \
+        vim \
   && rm -rf /var/lib/apt/lists/*
 
 # install uwsgi now because it takes a little while
@@ -46,9 +47,7 @@ RUN pip install -r /home/docker/code/app/requirements.txt
 # add (the rest of) our code
 #COPY . /home/docker/code/
 
-# install django, normally you would remove this step because your project would already
-# be installed in the code/app/ directory
-RUN django-admin.py startproject website /home/docker/code/app/
-RUN cd /home/docker/code/app/website && django-admin startapp services
+COPY app/ /home/docker/code/app/
+
 EXPOSE 80
 CMD ["supervisord", "-n"]
