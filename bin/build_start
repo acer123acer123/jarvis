@@ -1,0 +1,4 @@
+vi Dockerfile
+docker build -t christopherryan/jarvis:v1 .
+docker run --name=jarvis -d  -p 80:80 christopherryan/jarvis:v1
+docker exec -t -i jarvis /bin/bash
