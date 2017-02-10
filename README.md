@@ -1,4 +1,4 @@
- jarvis
+<pre>
  This is an integration between the Amazon Echo and local automation devices.
  
  Installation
@@ -7,4 +7,5 @@
   Point a browser to localhost
 
   At this point there is nothing more than the default Django application.
+</pre>
 #  
