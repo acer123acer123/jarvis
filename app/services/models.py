@@ -1,18 +1,22 @@
+from tastypie.utils.timezone import now
+from django.contrib.auth.models import User
 from django.db import models
-import uuid
+from django.utils.text import slugify
 
-class Product(models.Model):
-    name = models.CharField(max_length=30)
-    product_type = models.CharField(max_length=50)
-    price = models.IntegerField(max_length=20)
 
-    def __str__(self):
-        return self.name
+class Entry(models.Model):
+    user = models.ForeignKey(User)
+    pub_date = models.DateTimeField(default=now)
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(null=True, blank=True)
+    body = models.TextField()
 
-class Order(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    product = models.ForeignKey(Product)
+    def __unicode__(self):
+        return self.title
 
-    def __str__(self):
-        return self.id
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        if not self.slug:
+            self.slug = slugify(self.title)[:50]
 
+        return super(Entry, self).save(*args, **kwargs)
