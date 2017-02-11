@@ -3,6 +3,15 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 
+class Task(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    action_word = models.CharField(max_length=100)
+    cmd = models.CharField("command script", max_length=100)
+    done = models.BooleanField(default=False)
+
+    
 
 class Entry(models.Model):
     user = models.ForeignKey(User)
